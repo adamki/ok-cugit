@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+require_relative '../lib/okcugit'
+
+if ARGV.empty? || ARGV.any? { |arg| %w[-h --help help].include? arg }
+  $stderr.puts "Usage: okcugit github_repo\n",
+               "\n",
+               "Exmple: okcugit turingschool/challenges"
+  exit 1 if ARGV.empty?
+else
+  Okcugit.contributors_for(ARGV[0]).each do |contributor|
+    puts "\"#{contributor.name}\" <#{contributor.email}>"
+  end
+end
